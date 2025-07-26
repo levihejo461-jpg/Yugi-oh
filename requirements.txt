@@ -1,0 +1,8 @@
+flask>=3.1.1
+numpy>=2.3.2
+opencv-python>=4.11.0.86
+pillow>=11.3.0
+pytesseract>=0.3.13
+python-telegram-bot==20.8
+pytz>=2025.2
+requests>=2.32.4
