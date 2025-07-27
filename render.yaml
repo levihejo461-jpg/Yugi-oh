@@ -1,11 +1,14 @@
 services:
   - type: web
-    name: levi-bot
+    name: yugioh-bot
     env: python
-    region: oregon
-    plan: free
     buildCommand: pip install -r requirements.txt
-    startCommand: python main.py
-    runtime: python
-    pythonVersion: 3.13
+    startCommand: python app.py
     autoDeploy: true
+    envVars:
+      - key: BOT_TOKEN
+        value: your-telegram-bot-token-here
+      - key: DATABASE_URL
+        value: your-database-url-here
+      - key: DEBUG
+        value: "false"
