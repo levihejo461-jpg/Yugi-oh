@@ -11,11 +11,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# /start command
+# /start command handler
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Bot is alive, Captain Levi!")
 
-# Handle image messages
+# Image handler with filetype check
 async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     photo = update.message.photo[-1]
     file = await photo.get_file()
@@ -39,7 +39,6 @@ async def main():
 
     await app.run_polling()
 
-# Run the bot
 if __name__ == "__main__":
     import asyncio
     asyncio.run(main())
