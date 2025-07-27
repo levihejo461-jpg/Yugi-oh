@@ -3,3 +3,4 @@ requests
 pytz
 pillow
 pytesseract
+opencv-python-headless
