@@ -1,4 +1,2 @@
-python-telegram-bot==20.6
-filetype
---upgrade-strategy eager
-
+flask>=2.0
+requests==2.31.0
