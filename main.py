@@ -4,18 +4,15 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from telegram import Update
 import filetype
 
-# Enable logging
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
 
-# /start command handler
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text("Bot is alive, Captain Levi!")
 
-# Image handler with filetype check
 async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     photo = update.message.photo[-1]
     file = await photo.get_file()
@@ -24,19 +21,14 @@ async def handle_image(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await file.download_to_drive(file_path)
 
     kind = filetype.guess(file_path)
-    if kind is None:
-        await update.message.reply_text("I can't tell what type of image this is.")
-    else:
-        await update.message.reply_text(f"Image type: {kind.mime}")
+    msg = f"Image type: {kind.mime}" if kind else "Unknown image type."
+    await update.message.reply_text(msg)
 
-# Main bot setup
 async def main():
-    TOKEN = "YOUR_BOT_TOKEN_HERE"  # Replace with your actual bot token
+    TOKEN = "YOUR_BOT_TOKEN_HERE"
     app = Application.builder().token(TOKEN).build()
-
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(filters.PHOTO, handle_image))
-
     await app.run_polling()
 
 if __name__ == "__main__":
